@@ -1,0 +1,25 @@
+.wrapper-login-card{
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%)
+}
+
+.card-title{
+    font-weight:300;
+}
+
+.btn{
+	font-size: 14px;
+	margin-top:20px;
+}
+
+
+.login-form{
+	width:330px;
+	margin:20px;
+}
+

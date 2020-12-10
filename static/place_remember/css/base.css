@@ -1,0 +1,10 @@
+body{
+    font-family: Gill Sans, sans-serif
+}
+
+.site-header{
+    display: flex;
+    justify-content: center;
+    height: 75px;
+    color: #117df3;
+}

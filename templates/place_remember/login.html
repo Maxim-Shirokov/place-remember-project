@@ -1,0 +1,22 @@
+{% extends 'place_remember/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'place_remember/css/login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper-login-card">
+        <div class="card login-form">
+        <div class="card-body">
+            <h2 class="card-title text-center">Вход</h2>
+            <a href="{% url 'social:begin' 'facebook' %}">
+                <button type="button" class="btn btn-primary btn-block">
+                    <i class="fa fa-facebook pr-1"></i> facebook
+                </button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+.person-data{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 2%;
+}
+
+.person-data__name{
+    margin-right: 3%;
+    font-size: 2em;
+}
+

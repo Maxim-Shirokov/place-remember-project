@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 ]
 
 
@@ -144,13 +145,16 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['user_photos']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_photos']
 
-# SESSION_COOKIE_SECURE=False
+# SESSION_COOKIE_SECURE= False
 # SOCIAL_AUTH_REDIRECT_IS_HTTP = True
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
+  'fields': 'id, name, picture.type(small)'
+}
 SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
     ('name', 'name'),
-    ('email', 'email'),
     ('picture', 'picture'),
 ]

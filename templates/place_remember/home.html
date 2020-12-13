@@ -1,0 +1,21 @@
+{% extends 'place_remember/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'place_remember/css/home.css' %}">
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+    {% for ass in backends.associated %}
+      {% if ass.provider == 'facebook' %}
+          <div class="col text-center person-data">
+            <p class="person-data__name"> Name:  {{ ass.extra_data.name }} </p>
+            <img src="{{ass.extra_data.picture.data.url}}" alt="" style="border-radius: 50%">
+        </div>
+     {% endif %}
+    {% endfor %}
+    <button class="btn btn-warning">
+        <a style="color: black" href="{% url 'logout' %}">Logout</a>
+      </button>
+{% endblock %}
+

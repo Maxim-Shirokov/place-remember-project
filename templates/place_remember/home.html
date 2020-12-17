@@ -9,13 +9,32 @@
     {% for ass in backends.associated %}
       {% if ass.provider == 'facebook' %}
           <div class="col text-center person-data">
-            <p class="person-data__name"> Name:  {{ ass.extra_data.name }} </p>
+            <p class="person-data__name"> {{ ass.extra_data.name }} </p>
             <img src="{{ass.extra_data.picture.data.url}}" alt="" style="border-radius: 50%">
         </div>
      {% endif %}
     {% endfor %}
-    <button class="btn btn-warning">
-        <a style="color: black" href="{% url 'logout' %}">Logout</a>
-      </button>
+        <a style="color: black" href="{% url 'logout' %}">
+             <button class="btn btn-warning">Выход</button>
+        </a>
 {% endblock %}
 
+{% block content %}
+    <div class="d-flex flex-column align-items-center justify-content-center h-100">
+        <div>
+            {% if object_list %}
+                {% for place in object_list %}
+                    {{ place.comment }}
+                {% endfor %}
+            {% else %}
+                <p>У вас нет ни одного воспоминания</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <a href="{% url 'add-place' %}">
+                <button type="button" class="btn btn-primary" href="">Добавить воспоминание</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

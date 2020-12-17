@@ -1,0 +1,30 @@
+body{
+    overflow-y: hidden;
+}
+
+.form-wrapper {
+    padding: 10px;
+    position: absolute;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 40%;
+    background-color: white;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#id_name, #id_comment{
+    /*margin-bottom: 10px;*/
+    width: 70%;
+}
+
+#id_comment{
+    height: 60%;
+}
+
+
+#id_name textarea, #id_comment textarea {
+    text-align: center;
+}

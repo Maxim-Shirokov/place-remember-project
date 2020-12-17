@@ -1,0 +1,34 @@
+{% extends 'place_remember/home.html' %}
+{% load static %}
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'place_remember/css/add_place.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+{% endblock %}
+{% block content %}
+    <div class="">
+    <form class="form-wrapper" method="POST">
+        {% csrf_token %}
+        {{ form.name }}
+        {{ form.comment }}
+        {{ form.lat.as_hidden }}
+        {{ form.lng.as_hidden }}
+        {% if form.lat.errors %}
+            <p>Выберите место на карте</p>
+        {% endif %}
+            <button id="save" type="submit" class="btn btn-success">Сохранить</button>
+        </form>
+        <div id="mapid" style="height: 100vh"></div>
+    </div>
+    <script>
+        const MAP_KEY = "{{ MAP_KEY }}";
+        const lat_id = "{{ form.lat.id_for_label}}";
+        const lng_id = "{{ form.lng.id_for_label}}";
+    </script>
+    <script src="{% static 'place_remember/js/add_place-map.js'%}"></script>
+{% endblock %}

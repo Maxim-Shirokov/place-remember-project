@@ -16,14 +16,12 @@ body{
 }
 
 #id_name, #id_comment{
-    /*margin-bottom: 10px;*/
     width: 70%;
 }
 
 #id_comment{
     height: 60%;
 }
-
 
 #id_name textarea, #id_comment textarea {
     text-align: center;

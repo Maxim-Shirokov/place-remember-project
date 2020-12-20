@@ -1,4 +1,3 @@
-// const MAP_KEY = document.currentScript.getAttribute('MAP_KEY');
 let map = L.map('mapid', {zoomControl: false}).setView([51.505, -0.09], 12);
 L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${MAP_KEY}`, {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -20,6 +19,3 @@ function onMapClick(e) {
 }
 
 map.on('click', onMapClick);
-// save.onclick = function () {
-//     document.getElementById('username').value=latlng.toString();
-// }

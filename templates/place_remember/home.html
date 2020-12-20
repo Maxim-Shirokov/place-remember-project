@@ -2,39 +2,59 @@
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'place_remember/css/home.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
 {% endblock %}
 
 {% block header %}
     {{ block.super }}
     {% for ass in backends.associated %}
-      {% if ass.provider == 'facebook' %}
-          <div class="col text-center person-data">
-            <p class="person-data__name"> {{ ass.extra_data.name }} </p>
-            <img src="{{ass.extra_data.picture.data.url}}" alt="" style="border-radius: 50%">
-        </div>
-     {% endif %}
+        {% if ass.provider == 'facebook' %}
+            <div class="col text-center person-data">
+                <p class="person-data__name"> {{ ass.extra_data.name }} </p>
+                <img src="{{ ass.extra_data.picture.data.url }}" alt="" style="border-radius: 50%">
+            </div>
+        {% endif %}
     {% endfor %}
-        <a style="color: black" href="{% url 'logout' %}">
-             <button class="btn btn-warning">Выход</button>
-        </a>
+    <a style="color: black" href="{% url 'logout' %}">
+        <button class="btn btn-warning">Выход</button>
+    </a>
 {% endblock %}
 
 {% block content %}
-    <div class="d-flex flex-column align-items-center justify-content-center h-100">
-        <div>
-            {% if object_list %}
-                {% for place in object_list %}
-                    {{ place.comment }}
-                {% endfor %}
-            {% else %}
-                <p>У вас нет ни одного воспоминания</p>
-            {% endif %}
+    {% if not userlocation_list %}
+        <div class="d-flex flex-column align-items-center justify-content-center h-100">
+            <h2 class="m-5"> У вас нет воспоминаний </h2>
+            <div class="m-3">
+                <a href="{% url 'add-place' %}">
+                    <button type="button" class="btn btn-primary" href="">
+                        Добавить воспоминание
+                    </button>
+                </a>
+            </div>
         </div>
-
+    {% endif %}
+    {% if userlocation_list %}
         <div>
-            <a href="{% url 'add-place' %}">
-                <button type="button" class="btn btn-primary" href="">Добавить воспоминание</button>
-            </a>
+            <div class="add-button">
+                <a href="{% url 'add-place' %}">
+                    <button type="button" class="btn btn-primary" href="">
+                        Добавить воспоминание
+                    </button>
+                </a>
+            </div>
+            <div id="mapid" style="height: 100vh; width: 100%"></div>
         </div>
+        <script>
+            const MAP_KEY = "{{ MAP_KEY }}";
+            const added_place_json = JSON.parse('{{ added_place_json | escapejs}}');
+        </script>
+        <script src="{% static 'place_remember/js/home-map.js' %}">
+        </script>
+    {% endif %}
     </div>
 {% endblock %}

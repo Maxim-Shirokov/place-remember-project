@@ -1,3 +1,7 @@
+body{
+    overflow-y: hidden;
+}
+
 .person-data{
     display: flex;
     justify-content: flex-end;
@@ -7,5 +11,12 @@
 .person-data__name{
     margin-right: 3%;
     font-size: 2em;
+}
+
+.add-button{
+    position: absolute;
+    z-index: 999;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 

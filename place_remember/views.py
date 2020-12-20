@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.conf import settings
 from .forms import PlaceForm
 from django.urls import reverse_lazy, reverse
+from django.core import serializers
 
 
 # Create your views here.
@@ -18,6 +19,14 @@ def login(request):
 class PlaceListView(ListView):
     model = UserLocation
     template_name = 'place_remember/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['MAP_KEY'] = settings.MAP_KEY
+        context['added_place_json'] = serializers.serialize(
+            'json', UserLocation.objects.filter(user=self.request.user.id), ensure_ascii=False,
+        )
+        return context
 
     def get_queryset(self):
         return UserLocation.objects.filter(user=self.request.user.id)
